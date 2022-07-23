@@ -37,3 +37,7 @@ android {
         implementation 'org.tensorflow:tensorflow-lite-gpu:+'
     }
 }
+
+dependencies {
+    implementation 'androidx.annotation:annotation:1.2.0'
+}
