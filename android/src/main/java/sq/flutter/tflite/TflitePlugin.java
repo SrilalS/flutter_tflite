@@ -726,10 +726,33 @@ public class TflitePlugin implements FlutterPlugin, MethodChannel.MethodCallHand
             this.outputScores = new float[1][num];
             this.inputArray = new Object[]{imgData};
 
-            outputMap.put(0, outputLocations);
-            outputMap.put(1, outputClasses);
-            outputMap.put(2, outputScores);
-            outputMap.put(3, numDetections);
+            //outputMap.put(0, outputLocations);
+            //outputMap.put(1, outputClasses);
+            //outputMap.put(2, outputScores);
+            //outputMap.put(3, numDetections);
+
+            for(int outputMapLocationIterator = 0; outputMapLocationIterator <= 3; outputMapLocationIterator++){
+                String thisTensorName = tfLiteObjectRecognition.getOutputTensor(outputMapLocationIterator).name();
+                switch (thisTensorName) {
+                case "StatefulPartitionedCall:3": {
+                    outputMap.put(outputMapLocationIterator, outputLocations);
+                    break;
+                }
+                case "StatefulPartitionedCall:2": {
+                    outputMap.put(outputMapLocationIterator, outputClasses);
+                    break;
+                }
+                case "StatefulPartitionedCall:1": {
+                    outputMap.put(outputMapLocationIterator, outputScores);
+                    break;
+                }
+                case "StatefulPartitionedCall:0": {
+                    outputMap.put(outputMapLocationIterator, numDetections);
+                    break;
+                }
+                }
+
+            }
 
             startTime = SystemClock.uptimeMillis();
         }
