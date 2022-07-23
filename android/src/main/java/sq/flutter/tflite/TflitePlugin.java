@@ -45,6 +45,9 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
+import io.flutter.FlutterInjector;
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.loader.FlutterLoader;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -58,11 +61,8 @@ import io.flutter.plugin.common.PluginRegistry;
 /**
  * TflitePlugin
  */
-public class TflitePlugin implements FlutterPlugin, MethodChannel.MethodCallHandler, ActivityAware {
-    /// The MethodChannel that will the communication between Flutter and native Android
-    ///
-    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-    /// when the Flutter Engine is detached from the Activity
+public class TflitePlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
+    private Activity activity;
     private MethodChannel channel;
     private Context applicationContext;
     @SuppressWarnings("deprecation")
