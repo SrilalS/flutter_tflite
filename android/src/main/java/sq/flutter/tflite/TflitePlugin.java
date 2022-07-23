@@ -56,7 +56,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-
+import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 
 /**
  * TflitePlugin
@@ -79,7 +79,7 @@ public class TflitePlugin implements FlutterPlugin, MethodCallHandler, ActivityA
     private void onAttachedToEngine(Context applicationContext, BinaryMessenger messenger) {
         this.applicationContext = applicationContext;
         MethodChannel methodChannel = new MethodChannel(messenger, "plugins.flutter.io/tensor");
-        //methodChannel.setMethodCallHandler(this);
+        methodChannel.setMethodCallHandler(this);
     }
 
     @Override
